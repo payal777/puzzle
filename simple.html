@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Quiz</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+        <script src="jquery.drag-drop.plugin.js"></script>
+        <script>
+            $(function () {
+                // First example, A-F.
+                $("#source1>div").dragdrop();
+
+                // Second example, G-L.
+                $("#source2").dragdrop({
+                    makeClone: true,
+                    sourceHide: true,
+                    dragClass: "whileDragging",
+                    canDrag: function ($src, event) {
+                        $src = $(event.target);
+                        return $src.hasClass("not") ? null : $src;
+                    },
+                    canDrop: function ($dst) {
+                        return $dst.attr("id") == "destination" && $dst.children().size() < 2;
+                    },
+                });
+
+                // Third example, M-R.
+                $("#source3>div").dragdrop({
+                    makeClone: true,
+                    sourceClass: "pendingDrop",
+                    dropClass: "highlight",
+                    container: $('.content'),
+                    didDrop: function ($src, $dst) {
+                        if ($dst.attr("id") != "destination")
+                            $dst = $dst.parents("#destination");
+                        var currentText = $dst.text();
+                        currentText += $src.text();
+                        $dst.text(currentText);
+                    }
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h1>Quiz</h1>
+        </div>
+        <div class="content">
+            <p>Which is the heavier metal of these two? Gold or Silver?</p>
+            <div id="destination" class="drop boxes">
+            </div> 
+            <button id="firstButton" type="submit" form="form1" value="Submit">Click Me!</button>
+            <p>Which is the animal referred as the ship of the desert?</p>
+            <div id="destination" class="drop boxes">
+            </div>
+            <button id="secondButton" type="submit" form="form1" value="Submit">Click Me!</button>
+            <p>Which is the nearest star to planet earth? </p>
+            <div id="destination" class="drop boxes">
+            </div>
+            <button id="thirdButton" type="submit" form="form1" value="Submit">Click Me!</button>
+            <!--
+                        <p>Which is the fastest animal on the land?</p>
+                        <div id="destination" class="drop boxes d">
+                        </div>
+                        <button id="fourthButton" type="submit" form="form1" value="Submit">Click Me!</button>
+                        <p>Which is the principal source of energy for earth? </p>
+                                    <div id="destination" class="drop boxes e">
+                        </div>
+                        <button id="fifthButton" type="submit" form="form1" value="Submit">Click Me!</button>-->
+            <div id="source3" class="source boxes">
+                <div>A</div>
+                <div>B</div>
+                <div>C</div>
+                <div>D</div>
+                <div>E</div>
+                <div>F</div>
+            </div>
+            <div id="source3" class="source boxes">
+                <div>G</div>
+                <div>H</div>
+                <div>I</div>
+                <div>J</div>
+                <div>K</div>
+                <div>L</div>
+            </div>
+            <div id="source3" class="source boxes">
+                <div>M</div>
+                <div>N</div>
+                <div>O</div>
+                <div>P</div>
+                <div>Q</div>
+                <div>R</div>
+            </div>
+            <div id="source3" class="source boxes">
+                <div>S</div>
+                <div>T</div>
+                <div>U</div>
+                <div>V</div>
+                <div>W</div>
+                <div>X</div>
+            </div>
+            <div id="source3" class="source boxes">
+                <div>Y</div>
+                <div>Z</div>
+            </div>
+        </div>
+        <script>
+            $(document).ready(function () {
+                $('#firstButton').click(function () {
+                    myDivObj = document.getElementById("destination");
+                    var ans = myDivObj.innerHTML;
+                    ans = (ans.trim) ? ans.trim() : ans.replace(/^\s+/, '');
+                    if (ans == "GOLD") {
+                        alert("Correct Answer");
+                    } else {
+                        alert("Wrong Answer");
+                    }
+                });
+                $('#secondButton').click(function () {
+                    myDivObj = document.getElementById("destination");
+                    var secondAns = myDivObj.innerHTML;
+                    secondAns = (secondAns.trim) ? secondAns.trim() : secondAns.replace(/^\s+/, '');
+                    console.log(secondAns);
+                    if (secondAns == "CAMEL") {
+                        alert("Correct Answer");
+                    } else {
+                        alert("Wrong Answer");
+                    }
+                });
+            });
+
+
+        </script>
+    </body>
+</html>
+
