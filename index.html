@@ -1,0 +1,256 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Quiz</title>
+        <link rel="stylesheet" type="text/css" href="style.css" />
+        <script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+        <script src="jquery.drag-drop.plugin.js"></script>
+        <script type="text/javascript" src="jquery-2.0.3.js"></script>
+<script type="text/javascript" src="jquery.countdownTimer.js"></script>
+<link rel="stylesheet" type="text/css" href="jquery.countdownTimer.css" />
+        <script>
+            $(function () {
+                // First example, A-F.
+                $("#source1>div").dragdrop();
+
+                // Second example, G-L.
+                $("#source2").dragdrop({
+                    makeClone: true,
+                    sourceHide: true,
+                    dragClass: "whileDragging",
+                    canDrag: function ($src, event) {
+                        $src = $(event.target);
+                        return $src.hasClass("not") ? null : $src;
+                    },
+                    canDrop: function ($dst) {
+                        return $dst.attr("id") == "destination" && $dst.children().size() < 2;
+                    },
+                });
+
+                // Third example, M-R.
+                $("#source3>div").dragdrop({
+                    makeClone: true,
+                    sourceClass: "pendingDrop",
+                    dropClass: "highlight",
+                    container: $('.content'),
+                    didDrop: function ($src, $dst) {
+                        if ($dst.attr("id") != "destination")
+                            $dst = $dst.parents("#destination");
+                        var currentText = $dst.text();
+                        currentText += $src.text();
+                        $dst.text(currentText);
+                    }
+                });
+
+            });
+        </script>
+    </head>
+    <body>
+        <div class="header">
+            <h2 align="center">Quiz</h2>
+        </div>
+        
+        <h1><time>00:00:00</time></h1>
+        <div align="center">
+        <button id="start" >start</button>
+        <button id="stop">stop</button>
+        <button id="clear">clear</button>
+        </div>
+        <div>
+        <div id="left" class="content">
+            <p>Which is the heavier metal of these two? Gold or Silver?</p>
+            <div id="destination" class="a drop boxes">
+            </div> 
+            <button id="firstButton" type="submit" form="form1" value="Submit">Click Me!</button>
+            <p>Which is the animal referred as the ship of the desert?</p>
+            <div id="destination" class="b drop boxes">
+            </div>
+            <button id="secondButton" type="submit" form="form1" value="Submit">Click Me!</button>
+            <p>Which is the nearest star to planet earth? </p>
+            <div id="destination" class="c drop boxes">
+            </div>
+            <button id="thirdButton" type="submit" form="form1" value="Submit">Click Me!</button>
+            <p>Which is the fastest animal on the land?</p>
+            <div id="destination" class="d drop boxes">
+            </div>
+            <button id="fourthButton" type="submit" form="form1" value="Submit">Click Me!</button>
+			<p>Which is the longest river on the earth? </p>
+			<div id="destination" class="e drop boxes">
+            </div>
+            <button id="fifthButton" type="submit" form="form1" value="Submit">Click Me!</button>
+            <p>What country has the second largest population in the world?</p>
+            <div id="destination" class="f drop boxes">
+            </div>
+            <button id="sixthButton" type="submit" form="form1" value="Submit">Click Me!</button>
+            <p>Which planet is known as the Red Planet?</p>
+            <div id="destination" class="g drop boxes">
+            </div>
+            <button id="seventhButton" type="submit" form="form1" value="Submit">Click Me!</button>
+	    </div>
+			<div id="right">
+            <div id="source3" class="source boxes">
+                <div>A</div>
+                <div>B</div>
+                <div>C</div>
+                <div>D</div>
+                <div>E</div>
+                <div>F</div>
+            </div>
+            <div id="source3" class="source boxes">
+                <div>G</div>
+                <div>H</div>
+                <div>I</div>
+                <div>J</div>
+                <div>K</div>
+                <div>L</div>
+            </div>
+            <div id="source3" class="source boxes">
+                <div>M</div>
+                <div>N</div>
+                <div>O</div>
+                <div>P</div>
+                <div>Q</div>
+                <div>R</div>
+            </div>
+            <div id="source3" class="source boxes">
+                <div>S</div>
+                <div>T</div>
+                <div>U</div>
+                <div>V</div>
+                <div>W</div>
+                <div>X</div>
+            </div>
+            <div id="source3" class="source boxes">
+                <div>Y</div>
+                <div>Z</div>
+            </div>
+			</div>
+		</div>
+        <script>
+            $(document).ready(function () {
+                $('#firstButton').click(function () {
+                    var first=$('.a').text();
+                    first = (first.trim) ? first.trim() : first.replace(/^\s+/, '');
+                    if (first == "GOLD") {
+                        alert(first+'\t'+''+"Correct Answer");
+                        $('.a').empty();
+                    } else {
+                        alert(first+'\t'+''+"Wrong Answer");
+                        $('.a').empty();
+                    }
+                });
+                $('#secondButton').click(function () {
+                    var second=$('.b').text();
+                    second = (second.trim) ? second.trim() : second.replace(/^\s+/, '');
+                    if (second == "CAMEL") {
+                        alert(second+'\t'+''+"Correct Answer");
+                        $('.b').empty();
+                    } else {
+                        alert(second+'\t'+''+"Wrong Answer");
+                        $('.b').empty();
+                    }
+                });
+                $('#thirdButton').click(function () {
+                    var third=$('.c').text();
+                    third = (third.trim) ? third.trim() : third.replace(/^\s+/, '');
+                    if (third == "SUN") {
+                        alert(third+'\t'+''+"Correct Answer");
+                        $('.c').empty();
+                    } else {
+                        alert(third+'\t'+''+"Wrong Answer");
+                        $('.c').empty();
+                    }
+                });
+               $('#fourthButton').click(function () {
+                    var fourth=$('.d').text();
+                    fourth = (fourth.trim) ? fourth.trim() : fourth.replace(/^\s+/, '');
+                    if (fourth == "CHEETAH") {
+                        alert(fourth+'\t'+''+"Correct Answer");
+                        $('.d').empty();
+                    } else {
+                        alert(fourth+'\t'+''+"Wrong Answer");
+                        $('.d').empty();
+                    }
+                });
+			  $('#fifthButton').click(function () {
+                    var fifth=$('.e').text();
+                    fifth = (fifth.trim) ? fifth.trim() : fifth.replace(/^\s+/, '');
+                    if (fifth == "NILE") {
+                        alert(fifth+'\t'+''+"Correct Answer");
+                        $('.e').empty();
+                    } else {
+                        alert(fifth+'\t'+''+"Wrong Answer");
+                        $('.e').empty();
+                    }
+                });
+               $('#sixthButton').click(function () {
+                    var sixth=$('.f').text();
+                    sixth = (sixth.trim) ? sixth.trim() : sixth.replace(/^\s+/, '');
+                    if (sixth == "INDIA") {
+                        alert(sixth+'\t'+''+"Correct Answer");
+                        $('.f').empty();
+                    } else {
+                        alert(sixth+'\t'+''+"Wrong Answer");
+                        $('.f').empty();
+                    }
+                });
+               $('#seventhButton').click(function () {
+                    var seventh=$('.g').text();
+                    seventh = (seventh.trim) ? seventh.trim() : seventh.replace(/^\s+/, '');
+                    if (seventh == "MARS") {
+                        alert(seventh+'\t'+''+"Correct Answer");
+                        $('.g').empty();
+                    } else {
+                        alert(seventh+'\t'+''+"Wrong Answer");
+                        $('.g').empty();
+                    }
+                });
+var h1 = document.getElementsByTagName('h1')[0],
+    start = document.getElementById('start'),
+    stop = document.getElementById('stop'),
+    clear = document.getElementById('clear'),
+    seconds = 0, minutes = 0, hours = 0,
+    t;
+
+function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+            minutes = 0;
+            hours++;
+        }
+    }
+    
+    h1.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" + (seconds > 9 ? seconds : "0" + seconds);
+
+    timer();
+}
+function timer() {
+    t = setTimeout(add, 1000);
+}
+timer();
+
+
+/* Start button */
+start.onclick = timer;
+
+/* Stop button */
+stop.onclick = function() {
+    clearTimeout(t);
+}
+
+/* Clear button */
+clear.onclick = function() {
+    h1.textContent = "00:00:00";
+    seconds = 0; minutes = 0; hours = 0;
+}
+            });
+        </script>
+    </body>
+</html>
+
